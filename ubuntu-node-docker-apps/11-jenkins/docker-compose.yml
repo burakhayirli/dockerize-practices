@@ -1,0 +1,31 @@
+version: '3.1'
+
+services:
+  s_jenkins:
+    container_name: c_jenkins
+    image: jenkins/jenkins
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock #docker in docker
+      - ./data:/var/jenkins_home
+
+#docker logs -f c_jenkins
+
+#http://localhost:8080/
+#For Unlock jenkins! Password required
+#Jenkins initial setup is required. An admin user has been created and a password generated.
+#Please use the following password to proceed to installation:
+#0df6e9390ce64abba8dbc8355e0cbfa2
+#This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+#for getting password, contect to container using by bash
+#docker exec -it c_jenkins bash
+#ls /var/jenkins_home/secrets -ll
+#go initialAdminPassword file
+#----or-----
+#docker logs -f c_jenkins
+
+#wrong volume permissions solving
+# chown -R 1000:1000 /opt/app_data/jenkins (linux, ubuntu). /app_data/jenkins path created by us

@@ -1,0 +1,38 @@
+version: '3'
+#PHP5.6 - Nginx
+
+services:
+    #PHP Service
+    php_5_6:
+        image: php:5.6-fpm
+        container_name: php_5_6
+        tty: true
+        working_dir: /e/docker_folder/www/
+        volumes:
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./project/:/e/docker_folder/www/
+        networks:
+            - local-bridge
+
+    #$nginx service
+    nginx:
+        image: nginx:alpine
+        container_name: nginx
+        tty: true
+        volumes:
+            - ./project/:/e/docker_folder/www/
+            - ./nginx/conf.d:/etc/nginx/conf.d/
+        ports:
+            - "80:80"
+        networks:
+            - local-bridge
+    
+    #MySQL Service
+
+networks:
+    local-bridge:
+        driver: bridge
+
+
+      
+

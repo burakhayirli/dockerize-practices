@@ -1,0 +1,16 @@
+version: '3.1'
+
+services:
+  s_jenkins_with_docker:
+    container_name: c_jenkins_with_docker
+    image: burakhayirli/jenkinswithdocker
+    ports:
+      - 8080:8080
+    volumes:
+      - ./data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+#ff3a8836a5d34f9f84e2891b589b433f
+#docker exec -it c_jenkins_with_docker bash
+
+#docker-compose build

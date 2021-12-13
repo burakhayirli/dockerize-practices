@@ -1,0 +1,12 @@
+version: '3.1'
+
+services:
+  s_pushtohub2:
+    image: burakhayirli/pushtohub2
+    build:
+      context: .
+      #dockerifle: /opt/app_docs/Dockerfile
+
+#docker-compose build
+#docker-compose push 
+#docker-compose pull 

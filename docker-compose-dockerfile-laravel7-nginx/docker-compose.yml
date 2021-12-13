@@ -1,0 +1,41 @@
+version: '3'
+#Laravel (PHP 7.6) - Nginx
+
+services:
+    #PHP Service
+    laravel_7:
+        build:
+            context: ./project
+            dockerfile: ../php/Dockerfile
+        image: laravel_7
+        container_name: laravel_7
+        tty: true
+        working_dir: /e/docker_folder/www/
+        volumes:
+            - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+            - ./project/:/e/docker_folder/www/
+        networks:
+            - local-bridge
+
+    #$nginx service
+    nginx:
+        image: nginx:alpine
+        container_name: nginx_laravel_7
+        tty: true
+        volumes:
+            - ./project/:/e/docker_folder/www/
+            - ./nginx/conf.d:/etc/nginx/conf.d/
+        ports:
+            - "80:80"
+        networks:
+            - local-bridge
+    
+    #MySQL Service
+
+networks:
+    local-bridge:
+        driver: bridge
+
+
+      
+
